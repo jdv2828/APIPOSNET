@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CreditCardController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::prefix('cards')->group(function () {
+     Route::post('/', [CreditCardController::class, 'store'])->name('cards.store');
 });
+
+
+Route::prefix('payment')->group(function () {
+    Route::post('/', PaymentController::class)->name('payment.store');
+});
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
